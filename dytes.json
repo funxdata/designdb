@@ -1,0 +1,13 @@
+{
+  "name": "designdb",
+  "version": "1.0.0",
+  "description": "system for design document database management",
+  "keywords": ["designdb", "design document management"],
+  "author": "funxdata",
+  "type": "sys",
+  "exports": {
+      "./target/release/libdesigndb.dll":"designdb.dll",
+      "./target/release/libdesigndb.dylib":"designdb.dylib",
+      "./target/release/libdesigndb.so":"designdb.so"
+  }
+}

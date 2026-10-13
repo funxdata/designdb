@@ -1,0 +1,27 @@
+const files = [
+  "perf_insert.ts",
+  "perf_query.ts",
+  "perf_large_doc.ts",
+  "perf_utf8.ts",
+  "perf_concurrent.ts",
+];
+
+let failed = 0;
+const cwd = new URL(".", import.meta.url).pathname;
+
+for (const f of files) {
+  console.log(`\n══════════ ${f} ══════════`);
+  const cmd = new Deno.Command(Deno.execPath(), {
+    args: ["run", "--allow-net", f],
+    cwd,
+    stdout: "inherit",
+    stderr: "inherit",
+  });
+  const { code } = await cmd.output();
+  if (code !== 0) failed++;
+}
+
+console.log(
+  `\n${failed === 0 ? "✅ all passed" : `❌ ${failed} file(s) failed`}`,
+);
+Deno.exit(failed === 0 ? 0 : 1);
