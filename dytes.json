@@ -1,18 +1,21 @@
 {
   "name": "designdb",
   "uuid": "0bfc332d-4577-48d8-8e52-aff5cb02a94d",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PoloDB-based database for design document structures",
   "keywords": ["designdb", "design document", "polodb"],
   "author": "funxdata",
   "type": "sys",
   "license": "MIT",
-  "exports": {
-    "./target/release/designdb.dll": "libdesigndb.dll"
-  },
   "platform-exports": {
     "windows": {
       "./target/release/designdb.dll": "libdesigndb.dll"
+    },
+    "linux": {
+      "./target/release/libdesigndb.so": "libdesigndb.so"
+    },
+    "macos": {
+      "./target/release/libdesigndb.dylib": "libdesigndb.dylib"
     }
   }
 }
