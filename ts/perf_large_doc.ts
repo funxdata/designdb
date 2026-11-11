@@ -31,7 +31,7 @@ const db_query = (
 
 const path = `perf_large_${Date.now()}`;
 
-// 大小梯度测试：1KB → 8KB → 32KB → 60KB → 80KB
+// 大小梯度测试：1KB → 8KB → 32KB → 60KB → 80KB（均在 16MB 响应上限内）
 const sizes = [1024, 8192, 32768, 60000, 80000];
 
 for (const size of sizes) {
@@ -58,15 +58,15 @@ try {
   }
 } catch (e) {
   const msg = (e as Error).message;
-  if (msg.includes("404")) {
-    console.log(`\n⚠️  查询被 64KB buffer 上限截断（预期行为）：${msg}`);
+  if (msg.includes("500999") || msg.includes("exceeds")) {
+    console.log(`\n⚠️  查询超过 16MB 响应上限（预期行为）：${msg}`);
   } else {
     console.error(`❌ 查询失败: ${msg}`);
     Deno.exitCode = 1;
   }
 }
 
-// 数量累积：100 条 500B 文档，看总响应是否接近 64KB 边界
+// 数量累积：100 条 500B 文档，响应仍远低于 16MB 上限
 console.log("\n插入 100 条 500B 文档...");
 try {
   for (let i = 0; i < 100; i++) {
