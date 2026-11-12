@@ -1,7 +1,7 @@
 {
   "name": "designdb",
   "uuid": "0bfc332d-4577-48d8-8e52-aff5cb02a94d",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "PoloDB-based database for design document structures",
   "keywords": ["designdb", "design document", "polodb"],
   "author": "funxdata",

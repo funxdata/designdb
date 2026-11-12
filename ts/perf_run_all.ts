@@ -7,12 +7,12 @@ const files = [
 ];
 
 let failed = 0;
-const cwd = new URL(".", import.meta.url).pathname;
+const cwd = import.meta.dirname;
 
 for (const f of files) {
   console.log(`\n══════════ ${f} ══════════`);
   const cmd = new Deno.Command(Deno.execPath(), {
-    args: ["run", "--allow-net", f],
+    args: ["run", "--allow-ffi", "--allow-read", "--allow-write", "--allow-env", f],
     cwd,
     stdout: "inherit",
     stderr: "inherit",
